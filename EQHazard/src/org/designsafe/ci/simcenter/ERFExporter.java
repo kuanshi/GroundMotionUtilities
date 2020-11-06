@@ -144,14 +144,19 @@ public class ERFExporter {
 				{
 					@Override
 				    public int compare(final Pair<Integer, Double> p1, final Pair<Integer, Double> p2) {
-						if(p1.getValue() > p2.getValue())
+						if(p1.getValue() > p2.getValue()) {
 							return 1;
-						
-						if (p1.getValue().equals(p2.getValue()) && p1.getKey() > p2.getKey())
-								return 1;				
-
-						return -1;
-			    }});
+						} else if (p1.getValue() < p2.getValue()) {
+							return -1;
+						} else if (p1.getKey() > p2.getKey()) {
+							return 1;
+						} else if (p1.getKey() < p2.getKey()) {
+							return -1;
+						} else {
+							return 0;
+						}
+				    }
+				});
 		
 		long sortStopTime = System.currentTimeMillis();
 	    long sortElapsedTime = sortStopTime - sortStartTime;
